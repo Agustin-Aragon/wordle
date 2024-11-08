@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+    <link rel="shortcut icon" href="https://wordly.org/android-chrome-512x512.png" type="image/png">
     <title>Wordle</title>
 </head>
 <body>
-
-
+    
     <div class="contenedor-juego">
 
         <input type="text" id="palabra" maxlength="4" autofocus/>
@@ -97,9 +98,26 @@
         </div>
     
     </div>
-    <!-- <div class="ganaste">
-            <div class="palabra-correcta">GANASTE</div>
-    </div> -->
+    <div class="ganaste">
+        <div class="contenedor-ganaste">
+            <div class="ganaste-titulo">¡Ganaste! 🏆</div>
+            <button>volver a jugar</button>
+            <span>o presione Enter para jugar de nuevo</span>
+        </div>
+    </div>
+
+    <div class="perdiste">
+        <div class="contenedor-perdiste">
+            <div class="perdiste-titulo">¡Perdiste! 😫</div>
+            <div class="contenedor-palabra">
+                <div class="descripcion">La palabra era:</div>
+                <div class="palabra">Rata</div>
+            </div>
+            <button>volver a jugar</button>
+            <span>o presione Enter para jugar de nuevo</span>
+        </div>
+    </div>
+
 </body>
 <script src="script.js"></script>
 </html>

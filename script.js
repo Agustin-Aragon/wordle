@@ -1,4 +1,4 @@
-let palabras = ["casa", "mesa", "silo", "pato", "gato", "cama", "rayo", "celo", "frio", "cola", "nube", "vino", "taza", "jugo", "codo", "ojos", "boca", "mano", "pies", "rato", "dama", "goma", "lodo", "toma", "bote", "dedo", "riel", "roca", "nota", "cima", "loma", "caza", "piel", "tela", "fila", "nuez", "pavo", "fama", "lago", "ropa", "mapa", "boda", "piso", "miel", "dura", "cero", "hilo", "lima", "tiro", "lino", "area", "dado", "bici", "cola", "sopa", "muda", "juez", "fuga", "mono", "duro", "nido", "fino", "foto", "loro"]
+let palabras = ["caso", "mesa", "silo", "pato", "gato", "capa", "rayo", "celo", "frio", "cola", "nube", "vino", "taza", "jugo", "coma", "boca", "mano", "pies", "rato", "dama", "goma", "lodo", "toma", "bote", "remo", "riel", "roca", "nota", "cima", "loma", "caso", "piel", "tela", "fila", "nuez", "pavo", "fila", "lago", "ropa", "boda", "piso", "miel", "dura", "cero", "hilo", "lima", "tiro", "lino", "cola", "sopa", "muda", "juez", "fuga", "mano", "duro", "nido", "fino", "tero"]
 const palabraRandom = palabras[Math.round(Math.random() * palabras.length)]
 let intentos = 1;
 let posicion = 0
@@ -7,31 +7,69 @@ const tecla = document.querySelectorAll('.tecla')
 let texto = document.querySelector('#palabra')
 let paralabraIngresada;
 
-// const celda = document.querySelectorAll('.casilla.i1 .celda')
-// celda.forEach((celda, index) => {
-//     celda.textContent = `${index + 1}`
-// })
-// function validarPalabra (palabra, intento ) {
+const palabra = document.querySelector('.palabra')
+palabra.textContent = palabraRandom
 
-// }
-/*
+let win = false;
 
-function validarPalabra(palabra) {
+document.addEventListener('keydown', function(event) {
 
-    Array.from(i1.children).forEach((child , index)=> {
-
-        if(child.textContent.includes('a')) {
-            console.log('Tiene')
+    if(intentos <= 6) {
+        if(texto.value.length < 4) {
+            teclasValidas = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'ñ', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
+            if(teclasValidas.includes(event.key)) {
+                insertarLetra(intentos, event.key)
+                texto.value += event.key
+            }
         }
-        console.log(index)
+    }
+
+    if(event.key.includes('Backspace') && texto.value.length > 0) {
+        if(texto.value !== ''){
+            texto.value = texto.value.slice(0, texto.value.length - 1)
+            borrarLetra(intentos)
+        }
+    }
+
+    if(event.key.includes('Enter')) {
+        if(!win) {
+            if(intentos <= 6) {
+                if(texto.value.length === 4) {
+                    paralabraIngresada = texto.value
+                    texto.value = ''
+                    intentos += 1
+                    posicion = 0
     
-        if(child.textContent.includes('a') && index === 0) {
-            console.log('Index 0 tiene A')
+                    if(palabraRandom === paralabraIngresada) {
+                        validarLetra(intentos)
+                        setTimeout(() => {
+                            confeti()
+                            const ganaste = document.querySelector('.ganaste')
+                            ganaste.style.display = 'flex'
+                            win = true
+                        }, 500);
+                    } else {
+                        validarLetra(intentos)
+                        if(intentos === 7) {
+                            setTimeout(() => {
+                                const perdiste = document.querySelector('.perdiste')
+                                perdiste.style.display = 'flex'
+                            }, 500);
+                        }
+                    }
+    
+                } else {
+                    alert('Palabra demasiado corta')
+                }
+            }
+        } else {
+            alert('Juego reiniciado')
+            win = false
+            console.log(win)
         }
-    })
-}
-*/
 
+    }
+});
 
 function insertarLetra(intentos, teclaID) {
 
@@ -40,8 +78,6 @@ function insertarLetra(intentos, teclaID) {
     if(posicion < 4) {
         celda[posicion].textContent = teclaID
         posicion += 1
-        // console.log(`posicion ${posicion}`)
-        // console.log(`intentos ${intentos}`)
         celda[posicion - 1].classList.add('letra')
     }
 }
@@ -56,9 +92,8 @@ function borrarLetra(intentos) {
 function validarLetra(intentos) {
 
     const celdas = Array.from(document.querySelectorAll(`.casilla.i${intentos - 1} .celda`))
-
     const letras = []
-    
+
     celdas.forEach(letra => {
         letras.push(letra.textContent)
         letra.classList.remove('letra')
@@ -66,16 +101,14 @@ function validarLetra(intentos) {
     })
 
     for (let index = 0; index < 4; index++) {
-
+    
         const teclado = document.querySelector(`#${letras[index]}`)
         
         if(palabraRandom.includes(letras[index])) {
-            //console.log(palabraRandom.indexOf(letras[index]))
 
-            if(palabraRandom.indexOf(letras[index]) === index) {
+            if(palabraRandom[index] === letras[index]) {
                 setTimeout(() => {
-                    celdas[palabraRandom.indexOf(letras[index])].classList.add('correcto')
-                    console.log(letras[index])
+                    celdas[index].classList.add('correcto')
                     teclado.classList.remove('contiene')
                     teclado.classList.add('correcto')
                 }, 200);
@@ -102,11 +135,6 @@ tecla.forEach(tecla => {
 
         let teclaID = Event.currentTarget.id
 
-        // const celda = Array.from(document.querySelectorAll('.casilla.i1 .celda'))
-        // celda[1].forEach((celda, index) => {
-        //     celda.textContent = `${index + 10}`
-        // })
-
         if(!teclaID.includes('borrar') && !teclaID.includes('enter')) {
             
             if(intentos <= 6) {
@@ -118,8 +146,6 @@ tecla.forEach(tecla => {
         }
 
         if(teclaID.includes('borrar') && texto.value.length > 0) {
-            //console.log(texto.value.length)
-            //console.log(texto.value.slice(0, texto.value.length - 1))
             if(texto.value !== ''){
                 texto.value = texto.value.slice(0, texto.value.length - 1)
                 borrarLetra(intentos)
@@ -131,20 +157,25 @@ tecla.forEach(tecla => {
             if(intentos <= 6) {
                 if(texto.value.length === 4) {
                     paralabraIngresada = texto.value
-                    //console.log(paralabraIngresada)
                     texto.value = ''
                     intentos += 1
                     posicion = 0
     
                     if(palabraRandom === paralabraIngresada) {
-                        // const celdas = Array.from(document.querySelectorAll(`.casilla.i${intentos - 1} .celda`))
-                        // celdas.forEach(letra => {
-                        //     letra.classList.add('contiene')
-                        // })
-                        //alert('exito')
                         validarLetra(intentos)
+                        setTimeout(() => {
+                            confeti()
+                            const ganaste = document.querySelector('.ganaste')
+                            ganaste.style.display = 'flex'
+                        }, 500);
                     } else {
                         validarLetra(intentos)
+                        if(intentos === 7) {
+                            setTimeout(() => {
+                                const perdiste = document.querySelector('.perdiste')
+                                perdiste.style.display = 'flex'
+                            }, 500);
+                        }
                     }
     
                 } else {
@@ -156,3 +187,40 @@ tecla.forEach(tecla => {
 
     })
 })
+
+function confeti() {
+    const duration = 1.5 * 1000,
+    animationEnd = Date.now() + duration,
+    defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+    }
+
+    const interval = setInterval(function() {
+    const timeLeft = animationEnd - Date.now();
+
+    if (timeLeft <= 0) {
+        return clearInterval(interval);
+    }
+
+    const particleCount = 50 * (timeLeft / duration);
+
+    confetti(
+        Object.assign({}, defaults, {
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+        })
+    );
+    confetti(
+        Object.assign({}, defaults, {
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+        })
+    );
+    }, 250);
+}
+
+function formatearJuego() {
+    const celdas = Array.from(document.querySelectorAll(`.casilla.i${intentos - 1} .celda`))
+}
