@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+
+:root {
+    --correcto: #79B851;
+    --no-contiene: #7D7D7D;
+    --borde: #a7adc083;
+    --fondo-casilla: #c0bebe;
+    --contiene-letra: #F3C237;
+    --fondo-tecla: #ebecf0;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.ganaste {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.5);
+
+    .palabra-correcta {
+        width: 300px;
+        height: 300px;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.contenedor-juego {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    
+    .board {
+    
+        .casilla {
+            display: flex;
+    
+            .celda {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 50px;
+                height: 50px;
+                background-color: #FBFCFF;
+                border: 2px solid var(--borde);
+                padding: 10px;
+                color: #393E4C;
+                font-family: 'Lato';
+                font-size: 1.7em;
+                font-weight: bold;
+                border-radius: 6px;
+                text-transform: uppercase;
+                cursor: default;
+                user-select: none;
+                /* transition: background-color 0.3s; */
+                margin: 3px;
+                box-sizing: border-box;
+    
+                /* &:empty:hover {
+                    background-color: #e0e0e0;
+                } */
+
+            }
+            
+        }
+
+    }
+    
+    .teclado {
+    
+        .fila {
+            display: flex;
+        }
+    
+        .tecla {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            background-color: var(--fondo-tecla);
+            /* background-color: #FBFCFF; */
+            /* border: 2px solid var(--borde); */
+            padding: 10px;
+            color: #393E4C;
+            font-family: 'Lato';
+            text-transform: uppercase;
+            font-size: 1.4em;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: default;
+            user-select: none;
+            transition: background-color 0.3;
+            box-sizing: border-box;
+            margin: 3px;
+            cursor: pointer;
+            border-right: 2px solid #cccdd1;
+            border-bottom: 2px solid #b0b1b4;
+
+            /* &:hover {
+                background-color: #cccdd1;
+            } */
+
+            /* &:active {
+                background-color: #b0b1b4;
+            } */
+        }
+
+        .ultima {
+            display: flex;
+            justify-content: center;
+
+            .borrar {
+                width: 80px;
+                transform: rotate(180deg);
+                border-right: none;
+                border-bottom: none;
+                border-top: 2px solid #fd5213;
+                border-left: 2px solid #fc571b;
+                background-color: #fc642c;
+                /* color 393E4C */
+
+                /* &:active {
+                    background-color: #fd5213;
+                } */
+            }
+    
+            .enter {
+                width: 80px;
+                text-transform: capitalize;
+                background-color: #fc642c;
+                border-right: 2px solid #fc571b;
+                border-bottom: 2px solid #fd5213;
+                color: white;
+
+                /* &:active {
+                    background-color: #fd5213;
+                } */
+            }
+        }
+    
+    }
+}
+
+.correcto {
+    background-color: var(--correcto) !important;
+    color: white !important;
+    border: none !important;    
+}
+
+.contiene {
+    background-color: var(--contiene-letra) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.no-contiene {
+    background-color: var(--no-contiene) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.activo {
+    .celda {
+        transition: background-color 0.3;
+
+        &:hover {
+            background-color: #e0e0e0 !important;
+        }
+    }
+}
+
+#palabra {
+    display: none;
+}
+
+.animacion {
+    animation: celdas 0.4s;
+}
+
+.letra {
+    animation: letra 0.2s forwards;
+}
+
+@keyframes letra {
+    0% {
+        border: 2px solid var(--borde);
+    }
+    50% {
+        border: 2px solid #A7ADC0;
+        scale: 1.1;
+    }
+    100% {
+        border: 2px solid #A7ADC0;
+        scale: 1;
+    }
+}
+
+@keyframes celdas {
+    /* from {
+        transform: rotateX(0deg);
+    }
+    to {
+        transform: rotateX(180deg);
+    } */
+
+    0% {
+        transform: rotateX(0deg);
+    }
+    50% {
+        transform: rotateX(90deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+}

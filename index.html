@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <title>Wordle</title>
+</head>
+<body>
+
+
+    <div class="contenedor-juego">
+
+        <input type="text" id="palabra" maxlength="4" autofocus/>
+
+        <div class="board">
+            <div class="casilla i1">
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+            </div>
+            <div class="casilla i2">
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+            </div>
+            <div class="casilla i3">
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+            </div>
+            <div class="casilla i4">
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+            </div>
+            <div class="casilla i5">
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+            </div>
+            <div class="casilla i6">
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+                <div class="celda"></div>
+            </div>
+        </div>
+    
+        <div class="teclado">
+            <div class="fila">
+                <div class="tecla" id="q">q</div>
+                <div class="tecla" id="w">w</div>
+                <div class="tecla" id="e">e</div>
+                <div class="tecla" id="r">r</div>
+                <div class="tecla" id="t">t</div>
+                <div class="tecla" id="y">y</div>
+                <div class="tecla" id="u">u</div>
+                <div class="tecla" id="i">i</div>
+                <div class="tecla" id="o">o</div>
+                <div class="tecla" id="p">p</div>
+            </div>
+            <div class="fila">
+                <div class="tecla" id="a">a</div>
+                <div class="tecla" id="s">s</div>
+                <div class="tecla" id="d">d</div>
+                <div class="tecla" id="f">F</div>
+                <div class="tecla" id="g">g</div>
+                <div class="tecla" id="h">h</div>
+                <div class="tecla" id="j">j</div>
+                <div class="tecla" id="k">k</div>
+                <div class="tecla" id="l">l</div>
+                <div class="tecla" id="ñ">ñ</div>
+            </div>
+            <div class="fila ultima">
+                <div class="tecla borrar" id="borrar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-backspace-reverse" viewBox="0 0 16 16">
+                        <path d="M9.854 5.146a.5.5 0 0 1 0 .708L7.707 8l2.147 2.146a.5.5 0 0 1-.708.708L7 8.707l-2.146 2.147a.5.5 0 0 1-.708-.708L6.293 8 4.146 5.854a.5.5 0 1 1 .708-.708L7 7.293l2.146-2.147a.5.5 0 0 1 .708 0"/>
+                        <path d="M2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7.08a2 2 0 0 0 1.519-.698l4.843-5.651a1 1 0 0 0 0-1.302L10.6 1.7A2 2 0 0 0 9.08 1zm7.08 1a1 1 0 0 1 .76.35L14.682 8l-4.844 5.65a1 1 0 0 1-.759.35H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/>
+                    </svg>
+                </div>
+                <div class="tecla" id="z">z</div>
+                <div class="tecla" id="x">x</div>
+                <div class="tecla" id="c">c</div>
+                <div class="tecla" id="v">v</div>
+                <div class="tecla" id="b">b</div>
+                <div class="tecla" id="n">n</div>
+                <div class="tecla" id="m">m</div>
+                <div class="tecla enter" id="enter">Enter</div>
+            </div>
+        </div>
+    
+    </div>
+    <!-- <div class="ganaste">
+            <div class="palabra-correcta">GANASTE</div>
+    </div> -->
+</body>
+<script src="script.js"></script>
+</html>
